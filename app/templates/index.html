@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Appendix</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}?v=3">
+</head>
+<body>
+    <div class="container">
+        <div class="theme-toggle-wrapper">
+            <span class="theme-label">☀️</span>
+            <label class="theme-switch">
+                <input type="checkbox" id="themeToggle">
+                <span class="slider"></span>
+            </label>
+            <span class="theme-label">🌙</span>
+        </div>
+        
+        <h1>📄 Auto Appendix</h1>
+        <p class="subtitle">Create appendix documents with one figure per page</p>
+        
+        <form action="/upload" method="post" enctype="multipart/form-data" id="uploadForm">
+            <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()">
+                <div class="upload-icon">📁</div>
+                <div class="upload-text">Click to select images</div>
+                <div class="upload-hint">or drag and drop here</div>
+                <div class="upload-hint" style="margin-top: 8px;">PNG, JPG, JPEG, GIF, BMP</div>
+                <input type="file" id="fileInput" name="files" multiple accept="image/*" required>
+            </div>
+            
+            <div class="file-count-container">
+                <div class="file-count" id="fileCount"></div>
+                <button type="button" id="resetBtn" class="reset-icon" style="display: none;" title="Clear files">✕</button>
+            </div>
+            
+            <div class="settings-group">
+                <label for="outputFormat">Output Format</label>
+                <select id="outputFormat" name="output_format">
+                    <option value="docx">Word Document (.docx)</option>
+                    <option value="pdf">PDF Document (.pdf)</option>
+                </select>
+            </div>
+
+            <!-- Advanced Settings Toggle -->
+            <div class="advanced-toggle" onclick="toggleAdvancedSettings()">
+                <span id="advancedToggleText">⚙️ Advanced Settings</span>
+                <span id="advancedToggleIcon">▼</span>
+            </div>
+            
+            <div id="advancedSettings" class="advanced-settings">
+                <div class="settings-group">
+                    <label for="paperSize">Paper Size</label>
+                    <select id="paperSize" name="paper_size">
+                        <option value="A4">A4 (21.0 × 29.7 cm)</option>
+                        <option value="Letter">Letter (21.6 × 27.9 cm)</option>
+                        <option value="Legal">Legal (21.6 × 35.6 cm)</option>
+                    </select>
+                </div>
+
+                <div class="settings-group">
+                    <label for="imageWidth">Image Width</label>
+                    <div class="range-container">
+                        <input type="range" id="imageWidth" name="image_width" min="8" max="20" value="15" step="0.5">
+                        <span class="range-value" id="widthValue">15.0 cm</span>
+                    </div>
+                </div>
+                
+                <div class="settings-group">
+                    <label for="captionPosition">Caption Position</label>
+                    <select id="captionPosition" name="caption_position">
+                        <option value="bottom">Below Image</option>
+                        <option value="top">Above Image</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button type="submit" id="submitBtn">Generate Document</button>
+        </form>
+        
+        <footer class="footer">
+            <p class="copyright">© 2025 RA. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <script src="{{ url_for('static', path='/js/main.js') }}?v=3"></script>
+</body>
+</html>
