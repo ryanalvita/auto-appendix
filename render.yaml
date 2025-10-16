@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: auto-appendix
+    env: docker
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: HOST
+        value: 0.0.0.0
